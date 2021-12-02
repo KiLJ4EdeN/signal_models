@@ -1,0 +1,31 @@
+import tensorflow as tf
+
+
+inputs = tf.keras.layers.Input(shape=(2000, 1))
+x = tf.keras.layers.Conv1D(filters=2, kernel_size=15, padding='valid')(inputs)
+x = tf.keras.layers.Conv1D(filters=2, kernel_size=15, padding='valid')(x)
+x = tf.keras.layers.MaxPooling1D(pool_size=2)(x)
+x = tf.keras.layers.Conv1D(filters=4, kernel_size=13, padding='valid')(x)
+x = tf.keras.layers.Conv1D(filters=4, kernel_size=13, padding='valid')(x)
+x = tf.keras.layers.MaxPooling1D(pool_size=2)(x)
+x = tf.keras.layers.Conv1D(filters=8, kernel_size=11, padding='valid')(x)
+x = tf.keras.layers.Conv1D(filters=8, kernel_size=11, padding='valid')(x)
+x = tf.keras.layers.MaxPooling1D(pool_size=2)(x)
+x = tf.keras.layers.Conv1D(filters=16, kernel_size=9, padding='valid')(x)
+x = tf.keras.layers.Conv1D(filters=16, kernel_size=9, padding='valid')(x)
+x = tf.keras.layers.MaxPooling1D(pool_size=2)(x)
+x = tf.keras.layers.Conv1D(filters=24, kernel_size=7, padding='valid')(x)
+x = tf.keras.layers.Conv1D(filters=24, kernel_size=7, padding='valid')(x)
+x = tf.keras.layers.MaxPooling1D(pool_size=2)(x)
+x = tf.keras.layers.Conv1D(filters=36, kernel_size=5, padding='valid')(x)
+x = tf.keras.layers.Conv1D(filters=36, kernel_size=5, padding='valid')(x)
+x = tf.keras.layers.MaxPooling1D(pool_size=2)(x)
+x = tf.keras.layers.Conv1D(filters=48, kernel_size=3, padding='valid')(x)
+x = tf.keras.layers.Conv1D(filters=48, kernel_size=3, padding='valid')(x)
+x = tf.keras.layers.GlobalAveragePooling1D()(x)
+x = tf.keras.layers.Flatten()(x)
+x = tf.keras.layers.Dense(1, activation='sigmoid')(x)
+
+model = tf.keras.models.Model(inputs=inputs,
+                              outputs=x, name='cnn-1d')
+print(model.summary())
